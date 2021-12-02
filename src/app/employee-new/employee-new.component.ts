@@ -1,25 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import employees from '../employees'
+import {Component, OnInit} from '@angular/core';
+import {Employee, EmployeeService} from '../employee.service';
 
+//Data binding
 @Component({
-  selector: 'employee-new',
-  templateUrl: './employee-new.component.html',
-  styleUrls: ['./employee-new.component.css']
+    selector: 'employee-new',
+    templateUrl: './employee-new.component.html',
+    styleUrls: ['./employee-new.component.css']
 })
 export class EmployeeNewComponent implements OnInit {
 
-  name = '';
-  salary = 0;
+    employee: Employee = {
+        name: '',
+        salary: 0,
+        bonus: 0,
+    };
 
-  employees = employees as any
+    constructor(private employeeService: EmployeeService) { }
 
-  constructor() { }
+    ngOnInit() {
+    }
 
-  ngOnInit(): void {
-  }
-
-  addEmployee(){
-    this.employees.push({name: this.name, salary: this.salary});
-    console.log(this.employees);
-  }
+    addEmployee() {
+        const copy = Object.assign({}, this.employee);
+        this.employeeService.addEmployee(copy);
+    }
 }

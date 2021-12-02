@@ -1,17 +1,18 @@
-<h1>
-  Nossos Empregados
-</h1>
+<h1>Nossos empregados</h1>
 <table>
-  <thead>
+    <thead>
     <tr>
-      <th>Nome</th>
-      <th>Salário</th>
+        <th>Nome</th>
+        <th>Salário</th>
+        <th>Bônus</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let employee of employees">
-      <th>{{ employee.name }}</th>
-      <th>{{ employee.salary }}</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employeeService.employees;let i=index;" [id]="'tr'+i">
+        <td [innerHtml]="employee.name"></td>
+        <td [innerHtml]="employee.salary"
+            [ngClass]="{'salary-expensive': employee.salary >= 2000, 'salary-cheap': employee.salary < 1000}"></td>
+        <td>{{employee.bonus}}</td>
     </tr>
-  </tbody>
+    </tbody>
 </table>
